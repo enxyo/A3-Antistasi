@@ -31,6 +31,7 @@ if (!isMultiPlayer) then
     [] execVM "initPetros.sqf";
 
     hcArray = [];
+    hc2Array = [];
     serverInitDone = true;
     diag_log "Antistasi SP. serverInitDone is true. Arsenal loaded";
     _nul = [] execVM "modBlacklist.sqf";
