@@ -22,7 +22,8 @@ if (isMultiplayer) then
 if (!hasInterface) exitWith
 	{
 	if (worldName == "Tanoa") then {call compile preprocessFileLineNumbers "roadsDB.sqf"} else {if (worldName == "Altis") then {call compile preprocessFileLineNumbers "roadsDBAltis.sqf"}};
-	[clientOwner] remoteExec ["A3A_fnc_addHC",2];
+	hcuid = getPlayerUID player;
+	[clientOwner,hcuid] remoteExec ["A3A_fnc_addHC",2];
 	};
 _isJip = _this select 1;
 if (isMultiplayer) then
