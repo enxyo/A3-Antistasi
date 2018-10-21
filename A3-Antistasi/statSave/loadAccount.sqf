@@ -36,6 +36,8 @@ if (isServer and !_byPassServer) then
 	["puestosFIA"] call fn_LoadStat; publicVariable "puestosFIA";
 	["mrkSDK"] call fn_LoadStat; /*if (isMultiplayer) then {sleep 5}*/;
 	["mrkCSAT"] call fn_LoadStat;
+	["dificultad"] call fn_LoadStat;
+	["gameMode"] call fn_LoadStat;
 	["destroyedCities"] call fn_LoadStat;
 	["minas"] call fn_LoadStat;
 	["cuentaCA"] call fn_LoadStat;
@@ -189,6 +191,72 @@ if (isServer and !_byPassServer) then
 	diag_log "Antistasi: Server sided Persistent Load done";
 
 	["tasks"] call fn_LoadStat;
+	if !(isMultiplayer) then
+		{
+		{
+		_pos = getMarkerPos _x;
+		_dmrk = createMarker [format ["Dum%1",_x], _pos];
+		_dmrk setMarkerShape "ICON";
+		[_x] call A3A_fnc_mrkUpdate;
+		if (lados getVariable [_x,sideUnknown] != buenos) then
+			{
+			_nul = [_x] call A3A_fnc_crearControles;
+			};
+		} forEach aeropuertos;
+
+		{
+		_pos = getMarkerPos _x;
+		_dmrk = createMarker [format ["Dum%1",_x], _pos];
+		_dmrk setMarkerShape "ICON";
+		_dmrk setMarkerType "loc_rock";
+		_dmrk setMarkerText "Resources";
+		[_x] call A3A_fnc_mrkUpdate;
+		if (lados getVariable [_x,sideUnknown] != buenos) then
+			{
+			_nul = [_x] call A3A_fnc_crearControles;
+			};
+		} forEach recursos;
+
+		{
+		_pos = getMarkerPos _x;
+		_dmrk = createMarker [format ["Dum%1",_x], _pos];
+		_dmrk setMarkerShape "ICON";
+		_dmrk setMarkerType "u_installation";
+		_dmrk setMarkerText "Factory";
+		[_x] call A3A_fnc_mrkUpdate;
+		if (lados getVariable [_x,sideUnknown] != buenos) then
+			{
+			_nul = [_x] call A3A_fnc_crearControles;
+			};
+		} forEach fabricas;
+
+		{
+		_pos = getMarkerPos _x;
+		_dmrk = createMarker [format ["Dum%1",_x], _pos];
+		_dmrk setMarkerShape "ICON";
+		_dmrk setMarkerType "loc_bunker";
+		[_x] call A3A_fnc_mrkUpdate;
+		if (lados getVariable [_x,sideUnknown] != buenos) then
+			{
+			_nul = [_x] call A3A_fnc_crearControles;
+			};
+		} forEach puestos;
+
+		{
+		_pos = getMarkerPos _x;
+		_dmrk = createMarker [format ["Dum%1",_x], _pos];
+		_dmrk setMarkerShape "ICON";
+		_dmrk setMarkerType "b_naval";
+		_dmrk setMarkerText "Sea Port";
+		[_x] call A3A_fnc_mrkUpdate;
+		if (lados getVariable [_x,sideUnknown] != buenos) then
+			{
+			_nul = [_x] call A3A_fnc_crearControles;
+			};
+		} forEach puertos;
+		lados setVariable ["NATO_carrier",malos,true];
+		lados setVariable ["CSAT_carrier",muyMalos,true];
+		};
 	statsLoaded = 0; publicVariable "statsLoaded";
 	placementDone = true; publicVariable "placementDone";
 	petros allowdamage true;
