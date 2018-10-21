@@ -67,7 +67,7 @@ if (side group _unit == buenos) then
 		};
 	//if ([_unit] call A3A_fnc_isMember) then {playerHasBeenPvP pushBack [getPlayerUID _unit,time]};
 	};
-if ((owner _unit) in hcArray) then
+if (_uid in hc2Array) then
 	{
 	//["hcDown",true,true,true,true] remoteExec ["BIS_fnc_endMission"]
 	_owner = owner _unit;
